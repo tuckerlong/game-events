@@ -12,6 +12,7 @@
 		<div id="card-base" class="card col-sm-6" style="width: 18rem; margin: 5px" hidden>
 			<div class="card-body">
 				<h5 class="card-title">Card title</h5>
+				<button id="favorite-button" class="btn btn-sm btn-outline-secondary" style="position:absolute; top: 0.75rem; right: 1.5rem">Favorite</button>
 				<p class="card-text">
 					<ul class="card-list">
 					</ul>
@@ -19,10 +20,16 @@
 			</div>
 		</div>
 
+		<h3>Favorites:</h3>
+		<div id="favorite-cards" class="row"></div>
+		<h3>List:</h3>
 		<div id="cards" class="row"></div>
 	</div>
 
 	<script>
+		const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+		console.log('Favorites', favorites)
+
 		async function run() {
 			const data = await (await fetch('src/data.json')).json();
 			const base = document.getElementById("card-base");
@@ -33,8 +40,17 @@
 				if (key === 'last_cache') return;
 
 				const copy = base.cloneNode(true);
+
 				copy.getRootNode().removeAttribute('hidden');
+				copy.getRootNode().id = getIdFromKey(key);
 				copy.querySelector('.card-title').innerText = key;
+
+				if (favorites.includes(key)) {
+					copy.querySelector('#favorite-button').setAttribute("onclick", `unfavorite("${key}")`);
+					copy.querySelector('#favorite-button').innerText = 'Unfavorite';
+				} else {
+					copy.querySelector('#favorite-button').setAttribute("onclick", `favorite("${key}")`);
+				}
 
 				const eventList = copy.querySelector('.card-list');
 
@@ -50,9 +66,43 @@
 					eventList.appendChild(element);
 				});
 
-				document.getElementById("cards").appendChild(copy);
+				document.getElementById(favorites.includes(key) ? "favorite-cards" : "cards").appendChild(copy);
 			});
 		};
+
+		function favorite(key) {
+			const element = document.getElementById(getIdFromKey(key));
+
+			element.querySelector('#favorite-button').setAttribute("onclick", `unfavorite("${key}")`);
+			element.querySelector('#favorite-button').innerText = 'Unfavorite';
+
+			document.getElementById("favorite-cards").appendChild(element);
+
+			favorites.push(key);
+
+			save();
+		}
+
+		function unfavorite(key) {
+			const element = document.getElementById(getIdFromKey(key));
+
+			element.querySelector('#favorite-button').setAttribute("onclick", `favorite("${key}")`);
+			element.querySelector('#favorite-button').innerText = 'Favorite';
+
+			document.getElementById("cards").appendChild(element);
+
+			favorites.splice(favorites.indexOf(key), 1);
+
+			save();
+		}
+
+		function save() {
+			localStorage.setItem("favorites", JSON.stringify(favorites));
+		}
+
+		function getIdFromKey(key) {
+			return key.replace(/\W/g, '_');
+		}
 
 		run();
 	</script>
