@@ -1,0 +1,12 @@
+name: 'Pull Events'
+description: 'Pull events from websites and populate json file.'
+author: 'Tucker Long'
+
+inputs:
+  GITHUB_TOKEN:
+    descritpion: 'GitHub token'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

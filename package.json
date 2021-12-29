@@ -1,0 +1,24 @@
+{
+  "name": "game-events-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/action.js -o dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuckerlong/game-events-data.git"
+  },
+  "author": "Tucker Long",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuckerlong/game-events-data/issues"
+  },
+  "homepage": "https://github.com/tuckerlong/game-events-data#readme",
+  "dependencies": {
+    "@vercel/ncc": "^0.33.1",
+    "jsdom": "^19.0.0"
+  }
+}
