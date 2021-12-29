@@ -6,6 +6,7 @@
 </head>
 <body>
 	<a href="https://github.com/tuckerlong/game-events-data/blob/main/src/data.json">Raw Data</a>
+	<span>Last Cache: <span id="last_cache"></span></span>
 
 	<div class="container">
 		<div id="card-base" class="card col-sm-6" style="width: 18rem; margin: 5px" hidden>
@@ -26,8 +27,10 @@
 			const data = await (await fetch('src/data.json')).json();
 			const base = document.getElementById("card-base");
 
+			document.getElementById("last_cache").innerText = data["last_cache"];
+
 			Object.keys(data).forEach(key => {
-				if (key === 'id') return;
+				if (key === 'last_cache') return;
 
 				const copy = base.cloneNode(true);
 				copy.getRootNode().removeAttribute('hidden');
