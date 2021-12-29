@@ -2,9 +2,10 @@ const fs = require("fs");
 
 async function run() {
 	const data = {
-		"id": Math.random().toString(),
+		"last_cache": (new Date()).toISOString(),
 		"Mabinogi": await require("./games/mabinogi"),
-		"Maplestory": await require("./games/maplestory")
+		"Maplestory": await require("./games/maplestory"),
+		"Vindictus": await require("./games/vindictus"),
 	}
 
 	console.log(data);

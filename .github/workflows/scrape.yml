@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: '12'
       - run: yarn install
+      - run: yarn build
       - uses: ./
       - name: Commit files
         run: |
