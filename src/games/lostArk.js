@@ -14,7 +14,7 @@ module.exports = new Promise(async (resolve, reject) => {
 
 	dom.window.document.body.querySelectorAll(".ags-SlotModule").forEach(element => {
 		const title = element.querySelector(".ags-SlotModule-contentContainer-heading").textContent.trim();
-		const link = "https://www.playlostark.com/" + element.querySelector("a").getAttribute("href");
+		const link = "https://www.playlostark.com" + element.querySelector("a").getAttribute("href");
 
 		events[title] = link;
 	});
