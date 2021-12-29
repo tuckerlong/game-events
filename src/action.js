@@ -5,6 +5,7 @@ async function run() {
 		"last_cache": (new Date()).toISOString(),
 		"Mabinogi": await require("./games/mabinogi"),
 		"Maplestory": await require("./games/maplestory"),
+		"OSRS": await require("./games/osrs"),
 		"Vindictus": await require("./games/vindictus"),
 	}
 
