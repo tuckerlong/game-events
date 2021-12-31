@@ -19,9 +19,11 @@ module.exports = new Promise(async (resolve, reject) => {
 		element.querySelectorAll("p").forEach((para, idx) => {
 			if (idx === 0) return;
 
-			const title = para.querySelector("b")?.textContent  || null;
+			const dateElement = para.querySelector("b");
 
-			if (title === null) return;
+			if (dateElement === null) return;
+
+			const title = dateElement.textContent;
 
 			events[title] = "https://www.kingdomofloathing.com/"
 		});
