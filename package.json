@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tuckerlong/game-events-data#readme",
   "dependencies": {
     "@vercel/ncc": "^0.33.1",
+    "follow-redirects": "^1.14.6",
     "jsdom": "^19.0.0"
   }
 }
