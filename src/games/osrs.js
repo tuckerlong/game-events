@@ -5,16 +5,16 @@ module.exports = new Promise(async (resolve, reject) => {
 	let dom = null;
 	
 	try {
-		dom = await util("https://secure.runescape.com/m=news/archive?oldschool=1");
+		dom = await util("https://oldschool.runescape.com/");
 	} catch(e) {
 		console.error(e);
 	}
 
 	if (dom === null) return resolve({});
 
-	dom.window.document.body.querySelectorAll(".news-article__details").forEach(element => {
-		const title = element.querySelector(".news-list-article__title-link").textContent.trim();
-		const link = element.querySelector(".news-list-article__title-link").getAttribute("href");
+	dom.window.document.body.querySelectorAll("article.news-article").forEach(element => {
+		const title = element.querySelector(".news-article__title").textContent.trim();
+		const link = element.querySelector(".news-article__title .secondary-link").getAttribute("href");
 
 		events[title] = link;
 	});
