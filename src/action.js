@@ -8,6 +8,7 @@ async function run() {
 		"Mabinogi": await require("./games/mabinogi"),
 		"Maplestory": await require("./games/maplestory"),
 		"OSRS": await require("./games/osrs"),
+		"Path of Exile": await require("./games/poe"),
 		"Vindictus": await require("./games/vindictus"),
 	}
 
