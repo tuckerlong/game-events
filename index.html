@@ -5,7 +5,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-	<a href="https://github.com/tuckerlong/game-events-data/blob/main/src/data.json">Raw Data</a>
+	<a href="https://github.com/tuckerlong/game-events/blob/main/src/data.json">Raw Data</a>
 	<span>Last Cache: <span id="last_cache"></span></span>
 
 	<div class="container">
@@ -25,6 +25,9 @@
 		<h3>List:</h3>
 		<div id="cards" class="row"></div>
 	</div>
+
+	<a class="twitter-timeline" href="https://twitter.com/bstategames?ref_src=twsrc%5Etfw">Tweets by bstategames</a> 
+
 
 	<script>
 		const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -110,5 +113,7 @@
 
 		run();
 	</script>
+	
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
