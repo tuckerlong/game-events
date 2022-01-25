@@ -5,18 +5,24 @@ module.exports = new Promise(async (resolve, reject) => {
 	let dom = null;
 	
 	try {
-		dom = await util("https://dragalialost.com/en/news/event/");
+		dom = await util("https://gamepress.gg/dragalialost/news");
 	} catch(e) {
 		console.error(e);
 	}
 
 	if (dom === null) return resolve({});
 
-	dom.window.document.body.querySelectorAll("#news-list li").forEach(element => {
-		const title = element.querySelector(".title").textContent.trim();
-		const link =  "https://dragalialost.com" + element.querySelector("a").getAttribute("href");
+	dom.window.document.body.querySelectorAll(".feed-item-container").forEach(element => {
+		if (element.querySelector(".game-home-feed-title").textContent.trim().toLowerCase() === 'announcements') {
+			return;
+		}
 
-		events[title] = link;
+		const title = element.querySelector(".feed-item-title").textContent.trim();
+		const link =  "https://gamepress.gg" + element.querySelector("a").getAttribute("href");
+
+		if (Object.keys(events).length < 5) {
+			events[title] = link;
+		}
 	});
 
 	resolve(events);
