@@ -23,6 +23,10 @@ module.exports = new Promise(async (resolve, reject) => {
 
 			if (dateElement === null) return;
 
+			if (Object.keys(events).length >= 5) {
+				return;
+			}
+
 			const title = dateElement.textContent;
 
 			events[title] = "https://www.kingdomofloathing.com/"

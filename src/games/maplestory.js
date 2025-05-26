@@ -1,21 +1,20 @@
-const util = require("../util");
+const steam = require("../steam");
 
 module.exports = new Promise(async (resolve, reject) => {
-	const events = {};
-	let dom = null;
+		const events = {};
+		let json = null;
+		
+		try {
+			json = await steam(216150, 5);
+		} catch(e) {
+			console.error(e);
+		}
 	
-	try {
-		dom = await util("https://maplestory.nexon.net/news/events#news-filter");
-	} catch(e) {
-		console.error(e);
-	}
-
-	if (dom === null) return resolve({});
-
-	dom.window.document.body.querySelectorAll(".news-item").forEach(element => {
-		const title = element.querySelector('.text h3').textContent.trim();
-		events[title] = 'https://maplestory.nexon.net/' + element.querySelector('.text h3 a').getAttribute('href');
-	});
-
-	resolve(events);
+		if (json === null) return resolve({});
+	
+		json.appnews.newsitems.forEach(async item => {
+			events[item.title] = item.url;
+		});
+	
+		resolve(events);
 });

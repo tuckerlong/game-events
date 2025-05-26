@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "ncc build src/action.js -o dist",
+    "build-data": "node src/action.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "dependencies": {
     "@vercel/ncc": "^0.33.1",
     "follow-redirects": "^1.14.6",
-    "jsdom": "^19.0.0"
+    "jsdom": "^19.0.0",
+    "rss-parser": "^3.13.0"
   }
 }

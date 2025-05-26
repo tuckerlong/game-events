@@ -1,25 +1,20 @@
-const util = require("../util");
+const Parser = require("rss-parser");
 
 module.exports = new Promise(async (resolve, reject) => {
 	const events = {};
-	let dom = null;
+	let feed = null;
 	
 	try {
-		dom = await util("https://www.pathofexile.com/forum/view-forum/news");
+		feed = await new Parser().parseURL("https://www.pathofexile.com/news/rss");
 	} catch(e) {
 		console.error(e);
 	}
 
-	if (dom === null) return resolve({});
+	if (feed === null) return resolve({});
 
-	dom.window.document.body.querySelectorAll(".thread").forEach(element => {
-		if (Object.keys(events).length >= 5) return;
-
-		const title = element.querySelector(".title").textContent.trim();
-		const link = "https://www.pathofexile.com" + element.querySelector(".title a").getAttribute("href");
-
-		events[title] = link;
-	});
+	for (let i = 0; i < Math.min(5, feed.items.length); i++) {
+		events[feed.items[i].title] = feed.items[i].link
+	}
 
 	resolve(events);
 });

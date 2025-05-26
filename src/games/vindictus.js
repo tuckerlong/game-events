@@ -13,10 +13,7 @@ module.exports = new Promise(async (resolve, reject) => {
 	if (json === null) return resolve({});
 
 	json.appnews.newsitems.forEach(item => {
-		let url = item.contents.substring(item.contents.indexOf("[url=") + 5, item.contents.length - 6);
-		url = url.substring(0,  url.lastIndexOf(']'));
-
-		events[item.title] = url;
+		events[item.title] = item.url;
 	});
 
 	resolve(events);

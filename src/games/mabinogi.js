@@ -22,8 +22,12 @@ module.exports = new Promise(async (resolve, reject) => {
 
 		if (valid) {
 			element.querySelectorAll("td > a").forEach(e => {
+				if (Object.keys(events).length >= 5) {
+					return;
+				}
+
 				events[e.textContent.trim()] = "https://wiki.mabinogiworld.com/" + e.getAttribute("href");
-			})
+			});
 		}
 	});
 

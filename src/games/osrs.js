@@ -13,6 +13,10 @@ module.exports = new Promise(async (resolve, reject) => {
 	if (dom === null) return resolve({});
 
 	dom.window.document.body.querySelectorAll("article.news-article").forEach(element => {
+		if (Object.keys(events).length >= 5) {
+			return;
+		}
+		
 		const title = element.querySelector(".news-article__title").textContent.trim();
 		const link = element.querySelector(".news-article__title .secondary-link").getAttribute("href");
 
